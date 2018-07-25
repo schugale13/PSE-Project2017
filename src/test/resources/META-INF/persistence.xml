@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="pse">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>org.se.lab.db.data.Post</class>
+		<class>org.se.lab.db.data.Community</class>
+		<class>org.se.lab.db.data.Enumeration</class>
+		<class>org.se.lab.db.data.User</class>
+		<class>org.se.lab.db.data.UserContact</class>
+		<class>org.se.lab.db.data.UserProfile</class>
+		<class>org.se.lab.db.data.PrivateMessage</class>
+		<class>org.se.lab.db.data.File</class>
+
+		<properties>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/pse" />
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.connection.username" value="student" />
+			<property name="hibernate.connection.password" value="student" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+			<property name="jboss.as.jpa.providerModule" value="org.hibernate:5.0" />	
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

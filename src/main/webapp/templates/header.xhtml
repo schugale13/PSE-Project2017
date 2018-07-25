@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>PSE 2017/18</title>
+	<meta name="author" content="SWD15"></meta>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+	<b:navBar brand="PSE 2017/18"
+		brand-href="activityStream.xhtml?faces-redirect=true" fixed="top"
+		inverse="true">
+		<h:form>
+			<b:navbarLinks>
+				<b:navLink value="Activity Stream"
+					href="activityStream.xhtml?faces-redirect=true"></b:navLink>
+				<b:navLink value="Available Communities"
+					href="communityoverview.xhtml?faces-redirect=true"></b:navLink>
+				<b:navLink value="Available Users"
+					href="useroverview.xhtml?faces-redirect=true"></b:navLink>
+			</b:navbarLinks>
+			<b:navbarLinks pull="right">
+				<b:dropMenu icon="user" value="#{userDataBean.loggedInUser.username}">
+					<b:navCommandLink id="profileButton" value="Profil" action="#{userDataBean.redirect}">
+						<f:param name="userid" value="#{userDataBean.loggedInUser.id}" />
+					</b:navCommandLink>
+					<b:navCommandLink id="adminAreaButton" value="Admin Area" action="adminPortal.xhtml?faces-redirect=true" rendered="#{userDataBean.admin}"></b:navCommandLink>	
+					<b:navCommandLink id="logoutButton" value="Logout" action="#{loginBean.logout}">
+					</b:navCommandLink>
+				</b:dropMenu>
+				<b:dropMenu icon="envelope" value="[#{userDataBean.messages.size()}] Admin-Messages" rendered="#{userDataBean.messages != null and userDataBean.admin}">
+					<p:repeat value="#{userDataBean.messages}" var="msg">
+						<b:navCommandLink value="#{msg.text} [mark read]" action="#{userDataBean.markRead(msg)}"></b:navCommandLink>
+					</p:repeat>
+				</b:dropMenu>
+			</b:navbarLinks>
+		</h:form>
+	</b:navBar>
+</h:body>
+</html>

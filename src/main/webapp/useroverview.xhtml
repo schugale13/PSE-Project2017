@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:b="http://bootsfaces.net/ui">
+<h:head></h:head>
+<h:body>
+	<ui:insert name="header">
+		<ui:include src="templates/header.xhtml" />
+	</ui:insert>
+	<b:jumbotron>
+		<b:container>
+			<h2>Available Users</h2>
+			<h:outputText id="error" value="#{userOverviewBean.errorMsg}" style="color:#ff0c13;"/>
+			<b:panel title="Users" look="success" collapsible="false">
+				<h:form>
+					<b:dataTable value="#{userOverviewBean.profiles}" var="user">
+						<b:dataTableColumn value="#{user.id}" label="Id" order="asc" />
+						<b:dataTableColumn value="#{user.firstname}" label="Firstname" />
+						<b:dataTableColumn value="#{user.lastname}" label="Lastname" />
+						<b:dataTableColumn value="#{user.description}" label="Description" />
+						<b:dataTableColumn label="Add Contact">
+							<b:commandButton value="Add Contact" look="primary" 
+								rendered="#{!userOverviewBean.userIsSessionUser(user.id) and userOverviewBean.userIsContact(user.id)}"
+								action="#{userDataBean.addContact()}" ajax="false">
+								<f:param name="contactName" value="#{user.user.username}" />
+							</b:commandButton>
+						</b:dataTableColumn>
+						<b:dataTableColumn label="Remove Contact">
+							<b:commandButton value="Remove Contact" look="danger" 
+								rendered="#{!userOverviewBean.userIsSessionUser(user.id) and !userOverviewBean.userIsContact(user.id)}"
+								action="#{userDataBean.removeContact()}" ajax="false">
+								<f:param name="contactName" value="#{user.user.username}" />
+							</b:commandButton>
+						</b:dataTableColumn>
+					</b:dataTable>
+				</h:form>
+			</b:panel>
+		</b:container>
+	</b:jumbotron>
+	<ui:insert name="footer">
+		<ui:include src="templates/footer.xhtml" />
+	</ui:insert>
+</h:body>
+</html>
