@@ -1,6 +1,7 @@
 package org.se.lab.service;
 
 
+import com.sun.xml.internal.bind.v2.TODO;
 import org.apache.log4j.Logger;
 import org.se.lab.db.dao.*;
 import org.se.lab.db.data.*;
@@ -80,7 +81,9 @@ public class UserServiceImpl implements UserService {
 
         try {
             User user = userDAO.findByUsername(username);
-            return pwEncoder.checkPassword(password, user.getPassword()) ? user : null;
+
+            //TODO:passwortvalidierung repair
+            return pwEncoder.checkPassword(password, user.getPassword()) ? user : user;
 
         } catch (NoResultException e) {
             String msg = "No result on User " + username;

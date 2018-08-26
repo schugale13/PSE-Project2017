@@ -2,6 +2,7 @@
 package org.se.lab.web;
 
 import org.apache.log4j.Logger;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.se.lab.db.data.User;
 import org.se.lab.service.ServiceException;
 import org.se.lab.service.UserService;
@@ -38,7 +39,9 @@ public class LoginBean implements Serializable {
     private Session session;
 
     public void doLogin() {
+
         try {
+
             user = service.login(getUsername(), getPassword());
 
             context = FacesContext.getCurrentInstance().getExternalContext();
@@ -47,13 +50,15 @@ public class LoginBean implements Serializable {
             RedirectHelper.redirect("/pse/activityStream.xhtml");
 
         } catch (ServiceException e) {
+
             String erroMsg = "Ooops something went wrong - pls contact the admin or try later";
             LOG.error(erroMsg, e);
             setErrorMsg(erroMsg);
         } catch (Exception e) {
-            String msg = "Something went wrong, pls contact the admin or try again.";
+            String msg = " went wrong, pls contact the admin or try again.";
             LOG.error(msg, e);
             setErrorMsg(msg);
+
         }
 
 
@@ -72,7 +77,7 @@ public class LoginBean implements Serializable {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
@@ -80,7 +85,7 @@ public class LoginBean implements Serializable {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
