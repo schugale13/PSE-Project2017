@@ -14,7 +14,7 @@
 	<distributionManagement>
 		<repository>
 			<id>artifact-repository</id>
-			<url>http://localhost:8082/nexus/content/repositories/snapshots</url>
+			<url>http://localhost:8082/repository/maven-snapshots/</url>
 		</repository>
 	</distributionManagement>
 
